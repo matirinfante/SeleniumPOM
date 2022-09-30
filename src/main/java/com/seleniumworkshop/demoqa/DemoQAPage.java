@@ -1,6 +1,8 @@
-package com.seleniumworkshop;
+package com.seleniumworkshop.demoqa;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
+import com.seleniumworkshop.BasePage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -32,6 +34,11 @@ public class DemoQAPage extends BasePage {
 
     public boolean droppableChange() {
         return droppableComponent.getAttribute("class").contains("ui-state-highlight");
+    }
+
+    public void highlightDroppable() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
+        jsExecutor.executeScript("arguments[0].style.background='yellow'", droppableComponent);
     }
 
 }

@@ -1,8 +1,7 @@
-package com.seleniumworkshop.test;
+package com.seleniumworkshop.test.demoqa;
 
-import com.seleniumworkshop.DemoQAPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import com.seleniumworkshop.demoqa.DemoQAPage;
+import com.seleniumworkshop.test.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -21,6 +20,7 @@ public class DemoQATest extends BaseTest {
         demoQAPage.launchSite();
         demoQAPage.dragElementToDrop();
         Assert.assertTrue(demoQAPage.droppableChange());
+        demoQAPage.highlightDroppable();
     }
 
 }
