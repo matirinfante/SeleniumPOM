@@ -15,6 +15,7 @@ public class PracticePage extends BasePage {
     @FindBy(xpath = "//table[@class='table-display']//tr")
     private List<WebElement> productTableRows;
 
+
     public void launchSite() {
         this.driver.get("https://rahulshettyacademy.com/AutomationPractice/");
     }
@@ -35,9 +36,13 @@ public class PracticePage extends BasePage {
     }
 
     public void highlightByValue(String value) {
+        List<WebElement> productTableRows = driver.findElements(By.xpath("//td[contains(text(),25)]//ancestor::tr"));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        productTableRows.stream().
-                filter((row) -> row.findElement(By.xpath("//td[contains(text()," + value + ")]")) != null).
-                forEach(element -> jsExecutor.executeScript("arguments[0].style.background='yellow'", element));
+//        productTableRows.
+//        forEach(element -> jsExecutor.executeScript("arguments[0].style.background='yellow'", element));
+
+        for (int i = 0; i < productTableRows.size(); i++) {
+            jsExecutor.executeScript("arguments[0].style.background='yellow'", productTableRows.get(i));
+        }
     }
 }

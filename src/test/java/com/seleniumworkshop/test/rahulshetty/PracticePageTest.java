@@ -15,10 +15,11 @@ public class PracticePageTest extends BaseTest {
     }
 
     @Test
-    public void highlightingTable() {
+    public void highlightingTable() throws InterruptedException {
         practicePage.launchSite();
-        practicePage.highlightRowByIndex(1);
+        //practicePage.highlightRowByIndex(1);
         practicePage.highlightByValue("25");
+        Thread.sleep(3000);
     }
 
 }

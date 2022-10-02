@@ -14,7 +14,7 @@ public class BaseTest {
     @BeforeTest
     public void setup() {
         System.out.println("** SELECT BROWSER TO PERFORM THE TESTS **");
-        System.out.println("1 - Chrome\n2 - Firefox\n 3 - Edge");
+        System.out.println("1 - Chrome\n2 - Firefox\n3 - Edge");
         //Scanner sc = new Scanner(System.in);
         //String option = sc.nextLine();
         String option = "1";
@@ -34,6 +34,6 @@ public class BaseTest {
 
     @AfterTest
     public void teardown() {
-        this.driver.quit();
+        //this.driver.quit();
     }
 }
