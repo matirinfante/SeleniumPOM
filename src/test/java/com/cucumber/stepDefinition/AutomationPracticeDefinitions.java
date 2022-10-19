@@ -1,34 +1,45 @@
-package com.seleniumpom.first.test;
+package com.cucumber.stepDefinition;
 
 import com.seleniumpom.BaseTest;
 import com.seleniumpom.first.PracticePage;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
-public class PracticePageTest extends BaseTest {
+
+public class AutomationPracticeDefinitions {
 
     PracticePage practicePage;
+    BaseTest baseTest;
 
-    @BeforeTest
-    public void setupPage() {
-        practicePage = new PracticePage(this.driver);
+    public AutomationPracticeDefinitions(BaseTest baseTest) {
+        this.baseTest = baseTest;
     }
 
-    @BeforeMethod
+    @Before
+    public void setupPage() {
+        this.baseTest.setUp();
+        practicePage = new PracticePage(this.baseTest.getDriver());
+    }
+
+    @Given("User is on homepage")
     public void visitSite() {
         practicePage.launchSite("https://rahulshettyacademy.com/AutomationPractice/");
     }
 
-    @Test(priority = 1)
-    public void firstTest() {
+    @When("user clicks on a radio button")
+    public void clicOnRadioButton() {
         practicePage.radioButtonSelect();
+    }
+
+    @Then("radio button status is changed")
+    public void showRadioButtonStatus() {
         practicePage.showRadioStatus();
     }
 
-    @Test(priority = 2)
     public void secondTest() throws InterruptedException {
         String placeholderText = practicePage.printPlaceholder();
         Assert.assertEquals(placeholderText, "Type to Select Countries");
@@ -37,7 +48,6 @@ public class PracticePageTest extends BaseTest {
         Assert.assertEquals(suggestionValue, "El Salvador");
     }
 
-    @Test(priority = 3)
     public void thirdTest() {
         String selectedText = practicePage.selectDropdownOption2();
         Assert.assertEquals(selectedText, "Option2");
@@ -45,13 +55,12 @@ public class PracticePageTest extends BaseTest {
         Assert.assertEquals(newSelectedText, "Option3");
     }
 
-    @Test(priority = 4)
     public void fourthTest() {
         practicePage.checkButtons();
     }
 
-    @Test(priority = 5)
     public void fifthTest() {
         practicePage.tabsHandling();
     }
 }
+

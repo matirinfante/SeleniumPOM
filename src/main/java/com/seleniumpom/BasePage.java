@@ -61,7 +61,7 @@ public class BasePage {
     }
 
     public void click(By locator) {
-        this.driver.findElement(locator).click();
+        getElement(locator).click();
     }
 
     public void click(WebElement element) {

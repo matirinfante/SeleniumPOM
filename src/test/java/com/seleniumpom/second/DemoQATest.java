@@ -51,7 +51,6 @@ public class DemoQATest extends BaseTest {
         practiceFormPage.uploadImage("C:/Users/Matias/Desktop/bird.jpg");
         practiceFormPage.selectStateCity(1, 3);
         practiceFormPage.submitAndCheck(data);
-        Thread.sleep(5000);
 
     }
 

@@ -44,9 +44,9 @@ public class PracticePage extends BasePage {
         List<WebElement> radioButtons = getElements(pRadioButtons);
         radioButtons.forEach((radio) -> {
                     if (isSelected(radio)) {
-                        System.out.println("SELECTED RadioButton:" + getText(radio));
+                        System.out.println("SELECTED RadioButton:" + getValue(radio));
                     } else {
-                        System.out.println("NOT SELECTED RadioButton:" + getText(radio));
+                        System.out.println("NOT SELECTED RadioButton:" + getValue(radio));
                     }
                 }
         );

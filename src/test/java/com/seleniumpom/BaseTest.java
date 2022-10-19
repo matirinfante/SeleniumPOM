@@ -1,21 +1,25 @@
 package com.seleniumpom;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeTest
-    public void setup() {
-        this.driver = WebDriverManager.chromedriver().create();
+
+    public void setUp() {
+        this.driver = WebDriverManager.edgedriver().create();
         this.driver.manage().window().maximize();
     }
 
-    @AfterTest
+    public WebDriver getDriver() {
+        return this.driver;
+    }
+
+    @After
     public void teardown() {
         this.driver.quit();
     }
