@@ -41,6 +41,10 @@ public class PracticeFormPage extends BasePage {
         super(driver);
     }
 
+    public void launchSite(String url) {
+        visit(url);
+    }
+
     public void preparePage() {
         hideElement(pFooter);
         hideElement(pAdBanner);
@@ -71,6 +75,39 @@ public class PracticeFormPage extends BasePage {
 
     }
 
+    public void enterName(String name) {
+        type(pInputName, name);
+    }
+
+    public void enterLastName(String lastName) {
+        type(pInputLastName, lastName);
+    }
+
+    public void enterEmail(String email) {
+        type(pInputEmail, email);
+    }
+
+    public void enterMobile(String mobile) {
+        type(pInputMobile, mobile);
+    }
+
+    public void enterAddress(String currentAddress) {
+        type(pInputCurrentAddress, currentAddress);
+    }
+
+    public void enterSubjects(String subjectsString) {
+        String[] subjects = subjectsString.split(",");
+        for (String subject : subjects) {
+            enterSubject(subject);
+        }
+    }
+
+    public void enterSubject(String subject) {
+        type(pInputSubject, subject);
+        typeKey(pInputSubject, Keys.ARROW_DOWN);
+        typeKey(pInputSubject, Keys.ENTER);
+    }
+
     public void selectGender(String genderText) {
         clickOnRadioByText(pRadioGender, genderText);
     }
@@ -80,8 +117,15 @@ public class PracticeFormPage extends BasePage {
         waitForVisibility(pDatePickerCalendar);
         selectOption(pSelectMonth, Integer.parseInt(month) - 1);
         selectOptionByValue(pSelectYear, year);
-        By dayLocator = By.xpath("//div[contains(text(),day) and not(contains(@class, 'react-datepicker__day--outside-month'))]");
+        By dayLocator = By.xpath("//div[@class ='react-datepicker__month']//div[contains(@class,day) and not(contains(@class, 'react-datepicker__day--outside-month'))]");
         clickByExecutorAndDay(getElement(dayLocator), day);
+    }
+
+    public void pickHobbies(String hobbiesString) {
+        String[] hobbies = hobbiesString.split(",");
+        for (String hobbie : hobbies) {
+            pickHobbie(hobbie);
+        }
     }
 
     public void pickHobbie(String hobbiePick) {
@@ -96,6 +140,14 @@ public class PracticeFormPage extends BasePage {
         selectDropdownOption(pDropdownState, state);
         waitEnabled(pDropdownCity);
         selectDropdownOption(pDropdownCity, city);
+    }
+
+    public void clickSubmit() {
+        click(pSubmitButton);
+    }
+
+    public void checkModalTable(List<String> data) {
+        checkTable(pTableData, data);
     }
 
     public void submitAndCheck(List<String> data) {
@@ -114,5 +166,11 @@ public class PracticeFormPage extends BasePage {
             softAssert.assertEquals(getText(row), data.get(i));
             i++;
         }
+    }
+
+    private void checkTableRow(By locator, String data) {
+        List<WebElement> tRowsData = getElements(locator);
+
+        WebElement checkRow = tRowsData.stream().filter(element -> getText(element).equals(data)).findFirst().get();
     }
 }

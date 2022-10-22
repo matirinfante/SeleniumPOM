@@ -32,7 +32,7 @@ public class PracticePageTest extends BaseTest {
     public void secondTest() throws InterruptedException {
         String placeholderText = practicePage.printPlaceholder();
         Assert.assertEquals(placeholderText, "Type to Select Countries");
-        practicePage.typeAndSelectSuggestionText();
+        practicePage.typeAndSelectSuggestionText("");
         String suggestionValue = practicePage.getSuggestionValue();
         Assert.assertEquals(suggestionValue, "El Salvador");
     }
@@ -52,6 +52,6 @@ public class PracticePageTest extends BaseTest {
 
     @Test(priority = 5)
     public void fifthTest() {
-        practicePage.tabsHandling();
+        practicePage.tabsHandling(9);
     }
 }

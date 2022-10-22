@@ -53,6 +53,7 @@ public class BasePage {
     }
 
     public WebElement getElement(By locator) {
+        waitForVisibility(locator);
         return this.driver.findElement(locator);
     }
 
@@ -114,6 +115,11 @@ public class BasePage {
     public void selectOption(By locator, int index) {
         Select select = new Select(this.driver.findElement(locator));
         select.selectByIndex(index);
+    }
+
+    public void selectOption(By locator, String value) {
+        Select select = new Select(this.driver.findElement(locator));
+        select.selectByValue(value);
     }
 
     public void selectOptionByValue(By locator, String value) {

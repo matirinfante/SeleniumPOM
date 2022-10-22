@@ -20,4 +20,8 @@ public class DemoQAPage extends BasePage {
         click(pFormCard);
         return getUrl();
     }
+
+    public void clickFormCard() {
+        click(pFormCard);
+    }
 }

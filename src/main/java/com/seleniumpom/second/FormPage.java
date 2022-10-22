@@ -13,8 +13,16 @@ public class FormPage extends BasePage {
         super(driver);
     }
 
+    public void launchSite(String url) {
+        visit(url);
+    }
+
     public String checkGoToPracticeForm() {
         click(pPracticeForm);
         return getUrl();
+    }
+
+    public void clickPracticeForm() {
+        click(pPracticeForm);
     }
 }

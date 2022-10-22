@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PracticePage extends BasePage {
 
@@ -23,6 +24,7 @@ public class PracticePage extends BasePage {
     By pLoginButton = By.xpath("//button[contains(text(),'Login')]");
     By pSignupButton = By.xpath("//button[contains(text(),'Signup')]");
 
+    By pHeaderButtons = By.xpath("//header//button[@class='btn btn-primary']");
 
     public PracticePage(final WebDriver driver) {
         super(driver);
@@ -58,8 +60,8 @@ public class PracticePage extends BasePage {
         return suggestionPlaceholder;
     }
 
-    public void typeAndSelectSuggestionText() throws InterruptedException {
-        String textToType = "El Sal";
+    public void typeAndSelectSuggestionText(String textToType) {
+//        String textToType = "El Sal";
         type(pInputSuggestion, textToType);
         waitAndClick(pSuggestion);
     }
@@ -68,6 +70,16 @@ public class PracticePage extends BasePage {
         String value = getValue(pInputSuggestion);
         System.out.println(value);
         return value;
+    }
+
+    public void selectDropdownOption(String value) {
+        selectOption(pDropdownSelect, value);
+    }
+
+    public String getDropdownSelectedText() {
+        String dropdownSelection = getFirstSelectedOption(pDropdownSelect);
+        System.out.println(dropdownSelection);
+        return dropdownSelection;
     }
 
     public String selectDropdownOption2() {
@@ -82,6 +94,12 @@ public class PracticePage extends BasePage {
         String dropdownSelection = getFirstSelectedOptionNormal(pDropdownSelect);
         System.out.println(dropdownSelection);
         return dropdownSelection;
+    }
+
+    public void clickHeaderBtn(String buttonToClick) {
+        List<WebElement> headerButtons = getElements(pHeaderButtons);
+        WebElement btnSelected = headerButtons.stream().filter(element -> getText(element).equals(buttonToClick)).findFirst().get();
+        click(btnSelected);
     }
 
     public void checkButtons() {
@@ -103,13 +121,14 @@ public class PracticePage extends BasePage {
         }
     }
 
-    public void tabsHandling() {
-        for (int i = 1; i < 9; i++) {
+    public void tabsHandling(int times) {
+        for (int i = 1; i < times; i++) {
             click(pOpenTabButton);
             backToParent();
-            System.out.println("Number of tabs: " + getOpenTabs());
         }
-
+    }
+    public int getNumberOfCurrentTabs() {
+        return getOpenTabs();
     }
 
 }
